@@ -10,33 +10,190 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as PlatformRouteImport } from './routes/platform'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as SignInRouteImport } from './routes/sign-in'
+import { Route as SolutionsRouteImport } from './routes/solutions'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as SolutionsIndexRouteImport } from './routes/solutions.index'
+import { Route as SolutionsCampaignManagementRouteImport } from './routes/solutions.campaign-management'
+import { Route as SolutionsFieldOperationsRouteImport } from './routes/solutions.field-operations'
+import { Route as SolutionsTeamCoordinationRouteImport } from './routes/solutions.team-coordination'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowItWorksRoute = HowItWorksRouteImport.update({
+  id: '/how-it-works',
+  path: '/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlatformRoute = PlatformRouteImport.update({
+  id: '/platform',
+  path: '/platform',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignInRoute = SignInRouteImport.update({
+  id: '/sign-in',
+  path: '/sign-in',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SolutionsRoute = SolutionsRouteImport.update({
+  id: '/solutions',
+  path: '/solutions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SolutionsIndexRoute = SolutionsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SolutionsRoute,
+} as any)
+const SolutionsCampaignManagementRoute =
+  SolutionsCampaignManagementRouteImport.update({
+    id: '/campaign-management',
+    path: '/campaign-management',
+    getParentRoute: () => SolutionsRoute,
+  } as any)
+const SolutionsFieldOperationsRoute =
+  SolutionsFieldOperationsRouteImport.update({
+    id: '/field-operations',
+    path: '/field-operations',
+    getParentRoute: () => SolutionsRoute,
+  } as any)
+const SolutionsTeamCoordinationRoute =
+  SolutionsTeamCoordinationRouteImport.update({
+    id: '/team-coordination',
+    path: '/team-coordination',
+    getParentRoute: () => SolutionsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/faq': typeof FaqRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/platform': typeof PlatformRoute
+  '/privacy': typeof PrivacyRoute
+  '/sign-in': typeof SignInRoute
+  '/solutions': typeof SolutionsRouteWithChildren
+  '/terms': typeof TermsRoute
+  '/solutions/campaign-management': typeof SolutionsCampaignManagementRoute
+  '/solutions/field-operations': typeof SolutionsFieldOperationsRoute
+  '/solutions/team-coordination': typeof SolutionsTeamCoordinationRoute
+  '/solutions/': typeof SolutionsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/faq': typeof FaqRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/platform': typeof PlatformRoute
+  '/privacy': typeof PrivacyRoute
+  '/sign-in': typeof SignInRoute
+  '/terms': typeof TermsRoute
+  '/solutions/campaign-management': typeof SolutionsCampaignManagementRoute
+  '/solutions/field-operations': typeof SolutionsFieldOperationsRoute
+  '/solutions/team-coordination': typeof SolutionsTeamCoordinationRoute
+  '/solutions': typeof SolutionsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/faq': typeof FaqRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/platform': typeof PlatformRoute
+  '/privacy': typeof PrivacyRoute
+  '/sign-in': typeof SignInRoute
+  '/solutions': typeof SolutionsRouteWithChildren
+  '/terms': typeof TermsRoute
+  '/solutions/campaign-management': typeof SolutionsCampaignManagementRoute
+  '/solutions/field-operations': typeof SolutionsFieldOperationsRoute
+  '/solutions/team-coordination': typeof SolutionsTeamCoordinationRoute
+  '/solutions/': typeof SolutionsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/faq'
+    | '/how-it-works'
+    | '/platform'
+    | '/privacy'
+    | '/sign-in'
+    | '/solutions'
+    | '/terms'
+    | '/solutions/campaign-management'
+    | '/solutions/field-operations'
+    | '/solutions/team-coordination'
+    | '/solutions/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/faq'
+    | '/how-it-works'
+    | '/platform'
+    | '/privacy'
+    | '/sign-in'
+    | '/terms'
+    | '/solutions/campaign-management'
+    | '/solutions/field-operations'
+    | '/solutions/team-coordination'
+    | '/solutions'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/faq'
+    | '/how-it-works'
+    | '/platform'
+    | '/privacy'
+    | '/sign-in'
+    | '/solutions'
+    | '/terms'
+    | '/solutions/campaign-management'
+    | '/solutions/field-operations'
+    | '/solutions/team-coordination'
+    | '/solutions/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  FaqRoute: typeof FaqRoute
+  HowItWorksRoute: typeof HowItWorksRoute
+  PlatformRoute: typeof PlatformRoute
+  PrivacyRoute: typeof PrivacyRoute
+  SignInRoute: typeof SignInRoute
+  SolutionsRoute: typeof SolutionsRouteWithChildren
+  TermsRoute: typeof TermsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +205,121 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-it-works': {
+      id: '/how-it-works'
+      path: '/how-it-works'
+      fullPath: '/how-it-works'
+      preLoaderRoute: typeof HowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/platform': {
+      id: '/platform'
+      path: '/platform'
+      fullPath: '/platform'
+      preLoaderRoute: typeof PlatformRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sign-in': {
+      id: '/sign-in'
+      path: '/sign-in'
+      fullPath: '/sign-in'
+      preLoaderRoute: typeof SignInRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/solutions': {
+      id: '/solutions'
+      path: '/solutions'
+      fullPath: '/solutions'
+      preLoaderRoute: typeof SolutionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/solutions/': {
+      id: '/solutions/'
+      path: '/'
+      fullPath: '/solutions/'
+      preLoaderRoute: typeof SolutionsIndexRouteImport
+      parentRoute: typeof SolutionsRoute
+    }
+    '/solutions/campaign-management': {
+      id: '/solutions/campaign-management'
+      path: '/campaign-management'
+      fullPath: '/solutions/campaign-management'
+      preLoaderRoute: typeof SolutionsCampaignManagementRouteImport
+      parentRoute: typeof SolutionsRoute
+    }
+    '/solutions/field-operations': {
+      id: '/solutions/field-operations'
+      path: '/field-operations'
+      fullPath: '/solutions/field-operations'
+      preLoaderRoute: typeof SolutionsFieldOperationsRouteImport
+      parentRoute: typeof SolutionsRoute
+    }
+    '/solutions/team-coordination': {
+      id: '/solutions/team-coordination'
+      path: '/team-coordination'
+      fullPath: '/solutions/team-coordination'
+      preLoaderRoute: typeof SolutionsTeamCoordinationRouteImport
+      parentRoute: typeof SolutionsRoute
+    }
   }
 }
 
+interface SolutionsRouteChildren {
+  SolutionsCampaignManagementRoute: typeof SolutionsCampaignManagementRoute
+  SolutionsFieldOperationsRoute: typeof SolutionsFieldOperationsRoute
+  SolutionsTeamCoordinationRoute: typeof SolutionsTeamCoordinationRoute
+  SolutionsIndexRoute: typeof SolutionsIndexRoute
+}
+
+const SolutionsRouteChildren: SolutionsRouteChildren = {
+  SolutionsCampaignManagementRoute: SolutionsCampaignManagementRoute,
+  SolutionsFieldOperationsRoute: SolutionsFieldOperationsRoute,
+  SolutionsTeamCoordinationRoute: SolutionsTeamCoordinationRoute,
+  SolutionsIndexRoute: SolutionsIndexRoute,
+}
+
+const SolutionsRouteWithChildren = SolutionsRoute._addFileChildren(
+  SolutionsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  FaqRoute: FaqRoute,
+  HowItWorksRoute: HowItWorksRoute,
+  PlatformRoute: PlatformRoute,
+  PrivacyRoute: PrivacyRoute,
+  SignInRoute: SignInRoute,
+  SolutionsRoute: SolutionsRouteWithChildren,
+  TermsRoute: TermsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
