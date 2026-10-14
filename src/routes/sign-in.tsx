@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SignInPage } from "@/components/marketing/content-pages";
+import { SignInPage } from "@/components/marketing/pages/info-pages";
 import { pageHead } from "@/lib/marketing";
 export const Route = createFileRoute("/sign-in")({
   head: () =>

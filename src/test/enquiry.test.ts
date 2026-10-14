@@ -22,5 +22,6 @@ describe("Honest enquiry preparation", () => {
       worker: "https://urbayne.wayneesolutions.com/w",
       reporting: "https://urbayne.wayneesolutions.com/r",
     }));
-  it("includes all 14 requested public destinations", () => expect(publicPaths.length).toBe(14));
+  it("includes all 15 public destinations, including the team page", () =>
+    expect(publicPaths.length).toBe(15));
 });

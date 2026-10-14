@@ -1,5 +1,6 @@
 @import "tailwindcss" source(none);
 @import "tw-animate-css";
+@import "./pages.css";
 @source "../src";
 @custom-variant dark (&:is(.dark *));
 @theme inline {
@@ -32,38 +33,42 @@
   --color-hero-foreground: var(--hero-foreground);
   --color-hero-muted: var(--hero-muted);
   --color-lavender: var(--lavender);
+  --color-orange: var(--orange);
+  --color-orange-soft: var(--orange-soft);
   --color-success: var(--success);
   --color-success-soft: var(--success-soft);
   --color-warning: var(--warning);
   --color-warning-soft: var(--warning-soft);
 }
 :root {
-  --background: oklch(0.985 0.004 270);
-  --foreground: oklch(0.22 0.028 264);
+  --background: oklch(0.985 0.004 240);
+  --foreground: oklch(0.22 0.045 258);
   --card: oklch(1 0 0);
-  --primary: oklch(0.61 0.208 270);
+  --primary: oklch(0.52 0.105 222);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.953 0.013 273);
-  --muted: oklch(0.965 0.007 270);
-  --muted-foreground: oklch(0.51 0.025 264);
-  --border: oklch(0.91 0.012 270);
+  --secondary: oklch(0.955 0.014 225);
+  --muted: oklch(0.965 0.007 240);
+  --muted-foreground: oklch(0.5 0.03 255);
+  --border: oklch(0.91 0.014 240);
   --destructive: oklch(0.55 0.2 25);
-  --hero: oklch(0.18 0.031 265);
-  --hero-foreground: oklch(0.99 0.004 270);
-  --hero-muted: oklch(0.78 0.02 270);
-  --lavender: oklch(0.78 0.104 280);
+  --hero: oklch(0.2 0.055 258);
+  --hero-foreground: oklch(0.99 0.004 240);
+  --hero-muted: oklch(0.79 0.025 245);
+  --lavender: oklch(0.8 0.1 215);
+  --orange: oklch(0.69 0.155 50);
+  --orange-soft: oklch(0.96 0.03 60);
   --success: oklch(0.48 0.11 160);
   --success-soft: oklch(0.96 0.024 160);
   --warning: oklch(0.58 0.12 78);
   --warning-soft: oklch(0.98 0.032 85);
-  --shadow-soft: 0 12px 40px oklch(0.18 0.031 265 / 0.07);
-  --shadow-product: 0 30px 70px oklch(0.12 0.03 265 / 0.24), 0 0 0 1px oklch(1 0 0 / 0.08);
+  --shadow-soft: 0 12px 40px oklch(0.2 0.055 258 / 0.07);
+  --shadow-product: 0 30px 70px oklch(0.12 0.05 258 / 0.24), 0 0 0 1px oklch(1 0 0 / 0.08);
   --hero-shade: linear-gradient(
     90deg,
-    oklch(0.14 0.022 265 / 0.94) 0%,
-    oklch(0.14 0.022 265 / 0.85) 32%,
-    oklch(0.14 0.022 265 / 0.37) 64%,
-    oklch(0.14 0.022 265 / 0.14) 100%
+    oklch(0.15 0.05 258 / 0.94) 0%,
+    oklch(0.15 0.05 258 / 0.85) 32%,
+    oklch(0.15 0.05 258 / 0.37) 64%,
+    oklch(0.15 0.05 258 / 0.14) 100%
   );
   --hero-floor: linear-gradient(0deg, var(--hero), transparent);
   --showcase-wash: linear-gradient(135deg, var(--secondary), var(--background) 65%);
@@ -311,7 +316,7 @@ select {
   height: 6px;
   background: var(--primary);
   border-radius: 50%;
-  box-shadow: 0 0 0 4px oklch(0.61 0.208 270 / 0.15);
+  box-shadow: 0 0 0 4px oklch(0.52 0.105 222 / 0.15);
 }
 .hero h1 {
   font-size: 66px;
@@ -1709,7 +1714,7 @@ select {
     object-position: 62% center;
   }
   .hero::before {
-    background: linear-gradient(90deg, oklch(0.14 0.022 265 / 0.92), oklch(0.14 0.022 265 / 0.55));
+    background: linear-gradient(90deg, oklch(0.15 0.05 258 / 0.92), oklch(0.15 0.05 258 / 0.55));
   }
   .hero-product {
     width: 100%;

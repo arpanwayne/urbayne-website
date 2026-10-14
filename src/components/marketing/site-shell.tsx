@@ -3,24 +3,46 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight, ArrowUp, ChevronDown, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export function Logo() {
+export function Logo({ tone = "dark" }: { tone?: "dark" | "light" }) {
+  const suffix = tone === "light" ? "-light" : "";
   return (
     <Link to="/" className="logo" aria-label="Urbayne home">
-      <span className="brand-symbol" aria-hidden="true">
-        <i />
-        <i />
-        <i />
-      </span>
-      urbayne<span className="text-primary">.</span>
+      <img
+        className="logo-mark"
+        src={`/brand/urbayne-mark${suffix}.png`}
+        alt=""
+        width={30}
+        height={38}
+      />
+      <img
+        className="logo-word"
+        src={`/brand/urbayne-wordmark${suffix}.png`}
+        alt="Urbayne"
+        width={122}
+        height={14}
+      />
     </Link>
   );
 }
+/** Pages whose first section is a dark, full-bleed hero that sits under a transparent header. */
+export const overlayHeaderPaths = [
+  "/",
+  "/solutions",
+  "/solutions/field-operations",
+  "/about",
+  "/team",
+] as const;
 export function FinalCTA() {
   return (
     <section className="final-cta">
-      <span className="cta-decoration" aria-hidden="true">
-        u.
-      </span>
+      <img
+        className="cta-decoration-mark"
+        src="/brand/urbayne-mark-light.png"
+        alt=""
+        aria-hidden="true"
+        width={256}
+        height={326}
+      />
       <div className="container cta-inner">
         <div>
           <div className="eyebrow">A clearer way forward</div>
@@ -48,6 +70,17 @@ export function FinalCTA() {
     </section>
   );
 }
+const companyLinks = [
+  { to: "/about", label: "About Urbayne" },
+  { to: "/team", label: "Our team" },
+  { to: "/contact", label: "Contact" },
+] as const;
+const resourceLinks = [
+  { to: "/faq", label: "Frequently asked questions" },
+  { to: "/how-it-works", label: "How it works" },
+  { to: "/privacy", label: "Privacy policy" },
+  { to: "/terms", label: "Terms of service" },
+] as const;
 const solutionLinks = [
   { to: "/solutions/campaign-management", label: "Campaign management" },
   { to: "/solutions/field-operations", label: "Field operations" },
@@ -55,8 +88,12 @@ const solutionLinks = [
 ] as const;
 export function SiteShell({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
+  const overlay = (overlayHeaderPaths as readonly string[]).includes(
+    pathname.replace(/\/$/, "") || "/",
+  );
+  const isActive = (to: string) => pathname === to || pathname.startsWith(`${to}/`);
   const [open, setOpen] = useState(false);
-  const [dropdown, setDropdown] = useState<"solutions" | "resources" | null>(null);
+  const [dropdown, setDropdown] = useState<"solutions" | "company" | "resources" | null>(null);
   const [backTop, setBackTop] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -125,56 +162,44 @@ export function SiteShell({ children }: { children: ReactNode }) {
       >
         Skip to content
       </a>
-      <header className={`site-header ${pathname === "/" ? "" : "solid"}`}>
+      <header className={`site-header ${overlay ? "" : "solid"}`}>
         <div className="container nav-inner">
-          <Logo />
+          <Logo tone={overlay ? "light" : "dark"} />
           <nav className="desktop-nav" aria-label="Main navigation" ref={dropdownRef}>
-            <Link to="/platform" className={`nav-link ${pathname === "/platform" ? "active" : ""}`}>
+            <Link to="/platform" className={`nav-link ${isActive("/platform") ? "active" : ""}`}>
               Platform
             </Link>
-            <div className="nav-dropdown">
-              <Button
-                variant="ghost"
-                className="nav-link h-auto px-0 hover:bg-transparent"
-                onClick={() => setDropdown(dropdown === "solutions" ? null : "solutions")}
-                aria-expanded={dropdown === "solutions"}
-              >
-                Solutions <ChevronDown size={12} />
-              </Button>
-              {dropdown === "solutions" && (
-                <div className="dropdown-content">
-                  <Link to="/solutions">All solutions</Link>
-                  {solutionLinks.map((l) => (
-                    <Link key={l.to} to={l.to}>
-                      {l.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-            <Link to="/how-it-works" className="nav-link">
+            <NavMenu
+              id="solutions"
+              label="Solutions"
+              active={isActive("/solutions")}
+              open={dropdown === "solutions"}
+              onToggle={() => setDropdown(dropdown === "solutions" ? null : "solutions")}
+              links={[{ to: "/solutions", label: "All solutions" }, ...solutionLinks]}
+            />
+            <Link
+              to="/how-it-works"
+              className={`nav-link ${isActive("/how-it-works") ? "active" : ""}`}
+            >
               How It Works
             </Link>
-            <div className="nav-dropdown">
-              <Button
-                variant="ghost"
-                className="nav-link h-auto px-0 hover:bg-transparent"
-                onClick={() => setDropdown(dropdown === "resources" ? null : "resources")}
-                aria-expanded={dropdown === "resources"}
-              >
-                Resources <ChevronDown size={12} />
-              </Button>
-              {dropdown === "resources" && (
-                <div className="dropdown-content">
-                  <Link to="/faq">Frequently asked questions</Link>
-                  <Link to="/privacy">Privacy & data handling</Link>
-                </div>
-              )}
-            </div>
-            <Link to="/about" className="nav-link">
-              About
-            </Link>
-            <Link to="/contact" className="nav-link">
+            <NavMenu
+              id="company"
+              label="Company"
+              active={isActive("/about") || isActive("/team")}
+              open={dropdown === "company"}
+              onToggle={() => setDropdown(dropdown === "company" ? null : "company")}
+              links={companyLinks}
+            />
+            <NavMenu
+              id="resources"
+              label="Resources"
+              active={isActive("/faq") || isActive("/privacy") || isActive("/terms")}
+              open={dropdown === "resources"}
+              onToggle={() => setDropdown(dropdown === "resources" ? null : "resources")}
+              links={resourceLinks}
+            />
+            <Link to="/contact" className={`nav-link ${isActive("/contact") ? "active" : ""}`}>
               Contact
             </Link>
           </nav>
@@ -209,8 +234,9 @@ export function SiteShell({ children }: { children: ReactNode }) {
                 </Link>
               ))}
               <Link to="/how-it-works">How It Works</Link>
-              <Link to="/faq">Resources & FAQ</Link>
               <Link to="/about">About</Link>
+              <Link to="/team">Our Team</Link>
+              <Link to="/faq">FAQ</Link>
               <Link to="/contact">Contact</Link>
               <Link to="/sign-in">Sign In</Link>
               <Button variant="hero" asChild className="mt-5">
@@ -227,45 +253,58 @@ export function SiteShell({ children }: { children: ReactNode }) {
         <div className="container">
           <div className="footer-top">
             <div className="footer-brand">
-              <Logo />
+              <Link to="/" aria-label="Urbayne home" className="footer-logo">
+                <img src="/brand/urbayne-logo.png" alt="Urbayne" width={150} height={120} />
+              </Link>
               <p>
                 Campaigns are built by people.
                 <br />
                 We bring their work together.
               </p>
-              <Link to="/about" className="text-link">
-                Meet Urbayne <ArrowRight size={14} />
+              <Link to="/book-demo" className="text-link">
+                Book a demo <ArrowRight size={14} />
               </Link>
             </div>
             <div className="footer-column">
               <h4>Platform</h4>
               <Link to="/platform">Platform overview</Link>
               <Link to="/how-it-works">How it works</Link>
-              <Link to="/sign-in">Sign in</Link>
               <Link to="/book-demo">Book a demo</Link>
+              <Link to="/sign-in">Sign in</Link>
             </div>
             <div className="footer-column">
               <h4>Solutions</h4>
+              <Link to="/solutions">All solutions</Link>
               {solutionLinks.map((l) => (
                 <Link key={l.to} to={l.to}>
                   {l.label}
                 </Link>
               ))}
-              <Link to="/solutions">All solutions</Link>
             </div>
             <div className="footer-column">
               <h4>Company</h4>
               <Link to="/about">About Urbayne</Link>
+              <Link to="/team">Our team</Link>
               <Link to="/contact">Contact</Link>
-              <Link to="/faq">Resources & FAQ</Link>
+              <Link to="/faq">FAQ</Link>
+            </div>
+            <div className="footer-column">
+              <h4>Legal</h4>
+              <Link to="/privacy">Privacy policy</Link>
+              <Link to="/terms">Terms of service</Link>
             </div>
           </div>
           <div className="footer-bottom">
-            <span>© {new Date().getUTCFullYear()} Urbayne. A Wayne E Solutions project.</span>
+            <span>
+              © {new Date().getUTCFullYear()} Urbayne · A product of{" "}
+              <a href="https://wayneesolutions.com" target="_blank" rel="noreferrer">
+                Wayne E Solutions
+              </a>
+            </span>
             <div className="footer-legal">
-              <Link to="/privacy">Privacy Policy</Link>
-              <Link to="/terms">Terms of Service</Link>
-              <span>Built around your team.</span>
+              <Link to="/privacy">Privacy</Link>
+              <Link to="/terms">Terms</Link>
+              <Link to="/sign-in">Sign in</Link>
             </div>
           </div>
         </div>
@@ -290,5 +329,44 @@ export function SiteShell({ children }: { children: ReactNode }) {
         </Button>
       )}
     </>
+  );
+}
+
+function NavMenu({
+  id,
+  label,
+  links,
+  open,
+  active,
+  onToggle,
+}: {
+  id: string;
+  label: string;
+  links: readonly { to: string; label: string }[];
+  open: boolean;
+  active: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <div className="nav-dropdown">
+      <Button
+        variant="ghost"
+        className={`nav-link h-auto px-0 hover:bg-transparent ${active ? "active" : ""}`}
+        onClick={onToggle}
+        aria-expanded={open}
+        aria-controls={`menu-${id}`}
+      >
+        {label} <ChevronDown size={12} className={open ? "rotate-180 transition" : "transition"} />
+      </Button>
+      {open && (
+        <div className="dropdown-content" id={`menu-${id}`}>
+          {links.map((l) => (
+            <Link key={l.to} to={l.to as "/"}>
+              {l.label}
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }

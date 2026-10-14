@@ -3,6 +3,7 @@ import { createRouter, rootRouteId } from "@tanstack/react-router";
 import { describe, expect, it } from "vitest";
 
 import { routeTree } from "@/routeTree.gen";
+import { publicPaths } from "@/lib/marketing";
 
 // Match routes without running loaders or rendering: loaders may need a server or
 // network the test run lacks, and jsdom never loads the stylesheets React waits on.
@@ -13,5 +14,12 @@ describe("App routing", () => {
     const matches = router.matchRoutes("/");
 
     expect(matches.at(-1)?.routeId).not.toBe(rootRouteId);
+  });
+
+  it.each(publicPaths)("matches a real page for %s", (path) => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+    const leaf = router.matchRoutes(path).at(-1);
+    expect(leaf?.routeId).not.toBe(rootRouteId);
+    expect(leaf?.routeId.replace(/\/$/, "") || "/").toBe(path);
   });
 });
