@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PlatformPage } from "@/components/marketing/content-pages";
+import { PlatformPage } from "@/components/marketing/pages/platform-page";
 import { pageHead } from "@/lib/marketing";
 export const Route = createFileRoute("/platform")({
   head: () =>

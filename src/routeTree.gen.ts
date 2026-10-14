@@ -19,6 +19,7 @@ import { Route as PlatformRouteImport } from './routes/platform'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SignInRouteImport } from './routes/sign-in'
 import { Route as SolutionsRouteImport } from './routes/solutions'
+import { Route as TeamRouteImport } from './routes/team'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SolutionsIndexRouteImport } from './routes/solutions.index'
 import { Route as SolutionsCampaignManagementRouteImport } from './routes/solutions.campaign-management'
@@ -75,6 +76,11 @@ const SolutionsRoute = SolutionsRouteImport.update({
   path: '/solutions',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TeamRoute = TeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -115,6 +121,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/sign-in': typeof SignInRoute
   '/solutions': typeof SolutionsRouteWithChildren
+  '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
   '/solutions/campaign-management': typeof SolutionsCampaignManagementRoute
   '/solutions/field-operations': typeof SolutionsFieldOperationsRoute
@@ -131,6 +138,7 @@ export interface FileRoutesByTo {
   '/platform': typeof PlatformRoute
   '/privacy': typeof PrivacyRoute
   '/sign-in': typeof SignInRoute
+  '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
   '/solutions/campaign-management': typeof SolutionsCampaignManagementRoute
   '/solutions/field-operations': typeof SolutionsFieldOperationsRoute
@@ -149,6 +157,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/sign-in': typeof SignInRoute
   '/solutions': typeof SolutionsRouteWithChildren
+  '/team': typeof TeamRoute
   '/terms': typeof TermsRoute
   '/solutions/campaign-management': typeof SolutionsCampaignManagementRoute
   '/solutions/field-operations': typeof SolutionsFieldOperationsRoute
@@ -168,6 +177,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/sign-in'
     | '/solutions'
+    | '/team'
     | '/terms'
     | '/solutions/campaign-management'
     | '/solutions/field-operations'
@@ -184,6 +194,7 @@ export interface FileRouteTypes {
     | '/platform'
     | '/privacy'
     | '/sign-in'
+    | '/team'
     | '/terms'
     | '/solutions/campaign-management'
     | '/solutions/field-operations'
@@ -201,6 +212,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/sign-in'
     | '/solutions'
+    | '/team'
     | '/terms'
     | '/solutions/campaign-management'
     | '/solutions/field-operations'
@@ -219,6 +231,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   SignInRoute: typeof SignInRoute
   SolutionsRoute: typeof SolutionsRouteWithChildren
+  TeamRoute: typeof TeamRoute
   TermsRoute: typeof TermsRoute
 }
 
@@ -294,6 +307,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SolutionsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/team': {
+      id: '/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof TeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/terms': {
       id: '/terms'
       path: '/terms'
@@ -361,6 +381,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   SignInRoute: SignInRoute,
   SolutionsRoute: SolutionsRouteWithChildren,
+  TeamRoute: TeamRoute,
   TermsRoute: TermsRoute,
 }
 export const routeTree = rootRouteImport

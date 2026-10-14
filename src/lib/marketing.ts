@@ -13,6 +13,7 @@ export const publicPaths = [
   "/solutions/team-coordination",
   "/how-it-works",
   "/about",
+  "/team",
   "/contact",
   "/book-demo",
   "/privacy",
@@ -33,7 +34,7 @@ export function pageHead(title: string, description: string) {
     ],
   };
 }
-export const faqs = [
+export const faqs: [string, string][] = [
   [
     "What is Urbayne?",
     "Urbayne brings campaign planning, content, contacts, teams and field activity into a campaign-scoped digital workspace. The platform has administration screens and dedicated mobile-facing workflows.",

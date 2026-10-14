@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SolutionsPage } from "@/components/marketing/content-pages";
+import { SolutionsPage } from "@/components/marketing/pages/solutions-pages";
 import { pageHead } from "@/lib/marketing";
 export const Route = createFileRoute("/solutions/")({
   head: () =>
