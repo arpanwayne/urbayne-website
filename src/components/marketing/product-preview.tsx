@@ -1,6 +1,198 @@
-import { BarChart3, Users, LayoutDashboard, FileText, MapPin, CalendarDays, Link2, Check, Wifi, ArrowRight } from 'lucide-react';
-export type PreviewMode = 'overview'|'team'|'field';
-const nav = [{label:'Overview',icon:LayoutDashboard},{label:'Content',icon:FileText},{label:'Contacts',icon:Users},{label:'Team',icon:Users},{label:'Canvassing',icon:MapPin},{label:'Events',icon:CalendarDays},{label:'Share links',icon:Link2}];
-export function DashboardPreview({mode='overview'}:{mode?:PreviewMode}) {return <div className="dashboard" role="img" aria-label={`Illustrative Urbayne ${mode} screen with sample campaign data, not a live dashboard`}><div className="browser-bar"><i/><i/><i/><span>Urbayne · Campaign workspace</span></div><div className="dashboard-body"><aside className="dashboard-sidebar"><div className="dashboard-brand">urbayne<span className="text-primary">.</span></div>{nav.map(({label,icon:Icon})=><div key={label} className={`dashboard-nav ${(mode==='overview'&&label==='Overview')||(mode==='team'&&label==='Team')||(mode==='field'&&label==='Canvassing')?'selected':''}`}><Icon size={10}/>{label}</div>)}</aside><div className="dashboard-main"><div className="dashboard-top"><span>Campaign workspace / {mode==='overview'?'Overview':mode==='team'?'Team':'Canvassing'}</span><span>JD</span></div><h3>{mode==='overview'?'Every detail. One overview.':mode==='team'?'Your people, connected.':'From plan to field.'}</h3><div className="dashboard-subtitle">North District Campaign <span className="text-primary">· Sample workspace</span></div><div className="dashboard-stats">{(mode==='team'?[['Team members','24','Across assigned areas'],['Coordinators','4','Regional responsibilities'],['Field workers','18','Campaign team']]:mode==='field'?[['Assigned areas','8','Campaign area lists'],['Households visited','142','Recorded outcomes'],['Visits remaining','78','Assigned households']]:[['Contacts','220','Campaign contact list'],['Team members','24','Assigned campaign roles'],['Visits recorded','142','Field activity']]).map(([label,value,note])=><div key={label} className="dashboard-stat">{label}<strong>{value}</strong><small>{note}</small></div>)}</div>{mode==='team'?<div className="preview-table"><div className="preview-row head"><span>Team member</span><span>Role</span><span>Area</span></div>{[['Jordan Davis','Manager','North District'],['Aisha Patel','Coordinator','West Area'],['Alex Morgan','Worker','Area 04'],['Sam Taylor','Worker','Area 07']].map(row=><div className="preview-row" key={row[0]}><span>{row[0]}</span><span>{row[1]}</span><span>{row[2]}</span></div>)}</div>:<div className="dashboard-chart"><div className="chart-title">{mode==='field'?'Visits by area':'Field activity'}<span>Campaign-reported · Sample data</span></div><div className="chart">{Array.from({length:8},(_,i)=><div className="chart-column" key={i}><i/><i/></div>)}</div><div className="chart-axis">{['Area 01','02','03','04','05','06','07','08'].map(s=><span key={s}>{s}</span>)}</div></div>}</div></div></div>;}
-export function FloatingUpdate(){return <div className="floating-update"><span className="update-icon"><Check size={16}/></span><div><strong>Field activity recorded</strong><p>Area 04 · Household visit updated</p></div></div>;}
-export function PhonePreview(){return <div className="phone" role="img" aria-label="Illustrative worker mobile screen with assigned area, household outcomes and offline sync status"><div className="phone-screen"><div className="phone-notch"/><div className="phone-top"><span>urbayne<span className="text-primary">.</span></span><BarChart3 size={15}/></div><small>YOUR FIELD WORKSPACE</small><h4>Ready for the field.</h4><small>North District · Assigned areas</small><div className="phone-area"><strong>Area 04 — West <ArrowRight size={11} className="inline ml-2"/></strong><div className="phone-house">Household ···· 2841<br/><small>Record your visit outcome</small><div className="phone-results"><span>Supporter</span><span>Undecided</span><span>Not home</span><span>Needs help</span></div></div></div><div className="phone-area"><strong>Today’s visits</strong><p className="text-xs mt-2 text-muted-foreground">12 recorded · 8 remaining</p></div><div className="phone-sync"><Wifi size={11}/> Visits sync when connected</div></div></div>;}
+import {
+  BarChart3,
+  Users,
+  LayoutDashboard,
+  FileText,
+  MapPin,
+  CalendarDays,
+  Link2,
+  Check,
+  Wifi,
+  ArrowRight,
+} from "lucide-react";
+export type PreviewMode = "overview" | "team" | "field";
+const nav = [
+  { label: "Overview", icon: LayoutDashboard },
+  { label: "Content", icon: FileText },
+  { label: "Contacts", icon: Users },
+  { label: "Team", icon: Users },
+  { label: "Canvassing", icon: MapPin },
+  { label: "Events", icon: CalendarDays },
+  { label: "Share links", icon: Link2 },
+];
+export function DashboardPreview({ mode = "overview" }: { mode?: PreviewMode }) {
+  return (
+    <div
+      className="dashboard"
+      role="img"
+      aria-label={`Illustrative Urbayne ${mode} screen with sample campaign data, not a live dashboard`}
+    >
+      <div className="browser-bar">
+        <i />
+        <i />
+        <i />
+        <span>Urbayne · Campaign workspace</span>
+      </div>
+      <div className="dashboard-body">
+        <aside className="dashboard-sidebar">
+          <div className="dashboard-brand">
+            urbayne<span className="text-primary">.</span>
+          </div>
+          {nav.map(({ label, icon: Icon }) => (
+            <div
+              key={label}
+              className={`dashboard-nav ${(mode === "overview" && label === "Overview") || (mode === "team" && label === "Team") || (mode === "field" && label === "Canvassing") ? "selected" : ""}`}
+            >
+              <Icon size={10} />
+              {label}
+            </div>
+          ))}
+        </aside>
+        <div className="dashboard-main">
+          <div className="dashboard-top">
+            <span>
+              Campaign workspace /{" "}
+              {mode === "overview" ? "Overview" : mode === "team" ? "Team" : "Canvassing"}
+            </span>
+            <span>JD</span>
+          </div>
+          <h3>
+            {mode === "overview"
+              ? "Every detail. One overview."
+              : mode === "team"
+                ? "Your people, connected."
+                : "From plan to field."}
+          </h3>
+          <div className="dashboard-subtitle">
+            North District Campaign <span className="text-primary">· Sample workspace</span>
+          </div>
+          <div className="dashboard-stats">
+            {(mode === "team"
+              ? [
+                  ["Team members", "24", "Across assigned areas"],
+                  ["Coordinators", "4", "Regional responsibilities"],
+                  ["Field workers", "18", "Campaign team"],
+                ]
+              : mode === "field"
+                ? [
+                    ["Assigned areas", "8", "Campaign area lists"],
+                    ["Households visited", "142", "Recorded outcomes"],
+                    ["Visits remaining", "78", "Assigned households"],
+                  ]
+                : [
+                    ["Contacts", "220", "Campaign contact list"],
+                    ["Team members", "24", "Assigned campaign roles"],
+                    ["Visits recorded", "142", "Field activity"],
+                  ]
+            ).map(([label, value, note]) => (
+              <div key={label} className="dashboard-stat">
+                {label}
+                <strong>{value}</strong>
+                <small>{note}</small>
+              </div>
+            ))}
+          </div>
+          {mode === "team" ? (
+            <div className="preview-table">
+              <div className="preview-row head">
+                <span>Team member</span>
+                <span>Role</span>
+                <span>Area</span>
+              </div>
+              {[
+                ["Jordan Davis", "Manager", "North District"],
+                ["Aisha Patel", "Coordinator", "West Area"],
+                ["Alex Morgan", "Worker", "Area 04"],
+                ["Sam Taylor", "Worker", "Area 07"],
+              ].map((row) => (
+                <div className="preview-row" key={row[0]}>
+                  <span>{row[0]}</span>
+                  <span>{row[1]}</span>
+                  <span>{row[2]}</span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="dashboard-chart">
+              <div className="chart-title">
+                {mode === "field" ? "Visits by area" : "Field activity"}
+                <span>Campaign-reported · Sample data</span>
+              </div>
+              <div className="chart">
+                {Array.from({ length: 8 }, (_, i) => (
+                  <div className="chart-column" key={i}>
+                    <i />
+                    <i />
+                  </div>
+                ))}
+              </div>
+              <div className="chart-axis">
+                {["Area 01", "02", "03", "04", "05", "06", "07", "08"].map((s) => (
+                  <span key={s}>{s}</span>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+export function FloatingUpdate() {
+  return (
+    <div className="floating-update">
+      <span className="update-icon">
+        <Check size={16} />
+      </span>
+      <div>
+        <strong>Field activity recorded</strong>
+        <p>Area 04 · Household visit updated</p>
+      </div>
+    </div>
+  );
+}
+export function PhonePreview() {
+  return (
+    <div
+      className="phone"
+      role="img"
+      aria-label="Illustrative worker mobile screen with assigned area, household outcomes and offline sync status"
+    >
+      <div className="phone-screen">
+        <div className="phone-notch" />
+        <div className="phone-top">
+          <span>
+            urbayne<span className="text-primary">.</span>
+          </span>
+          <BarChart3 size={15} />
+        </div>
+        <small>YOUR FIELD WORKSPACE</small>
+        <h4>Ready for the field.</h4>
+        <small>North District · Assigned areas</small>
+        <div className="phone-area">
+          <strong>
+            Area 04 — West <ArrowRight size={11} className="inline ml-2" />
+          </strong>
+          <div className="phone-house">
+            Household ···· 2841
+            <br />
+            <small>Record your visit outcome</small>
+            <div className="phone-results">
+              <span>Supporter</span>
+              <span>Undecided</span>
+              <span>Not home</span>
+              <span>Needs help</span>
+            </div>
+          </div>
+        </div>
+        <div className="phone-area">
+          <strong>Today’s visits</strong>
+          <p className="text-xs mt-2 text-muted-foreground">12 recorded · 8 remaining</p>
+        </div>
+        <div className="phone-sync">
+          <Wifi size={11} /> Visits sync when connected
+        </div>
+      </div>
+    </div>
+  );
+}
