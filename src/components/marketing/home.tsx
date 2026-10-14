@@ -22,9 +22,7 @@ import {
   type PreviewMode,
 } from "./product-preview";
 import { FinalCTA } from "./site-shell";
-import team from "@/assets/team.jpg.asset.json";
-import planning from "@/assets/planning.jpg.asset.json";
-import people from "@/assets/people.jpg.asset.json";
+import { team, planning, people } from "@/assets/photos";
 export function Checks({ items }: { items: string[] }) {
   return (
     <ul className="feature-checks">

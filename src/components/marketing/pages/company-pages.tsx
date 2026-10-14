@@ -2,9 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, Compass, Eye, HeartHandshake, Layers, MapPin, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FinalCTA } from "../site-shell";
-import team from "@/assets/team.jpg.asset.json";
-import planning from "@/assets/planning.jpg.asset.json";
-import people from "@/assets/people.jpg.asset.json";
+import { team, planning, people } from "@/assets/photos";
 
 /* ─────────────────────────────── About ─────────────────────────────── */
 

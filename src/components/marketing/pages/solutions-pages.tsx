@@ -22,9 +22,7 @@ import { Button } from "@/components/ui/button";
 import { FinalCTA } from "../site-shell";
 import { Checks } from "../home";
 import { DashboardPreview, PhonePreview } from "../product-preview";
-import team from "@/assets/team.jpg.asset.json";
-import planning from "@/assets/planning.jpg.asset.json";
-import people from "@/assets/people.jpg.asset.json";
+import { team, planning, people } from "@/assets/photos";
 
 /* ───────────────────────── Solutions index ───────────────────────── */
 
